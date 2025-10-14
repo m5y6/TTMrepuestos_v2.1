@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Index from './pages/Index'
-import Registro from './pages/registro'
+import Registro from './pages/Registro'
 import Login from './pages/Login'
 import Catalogo from './pages/Catalogo'
 import Carrito from './pages/Carrito'

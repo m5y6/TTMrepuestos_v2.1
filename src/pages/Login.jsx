@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/App.css';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     // Estados para el formulario
@@ -228,7 +229,7 @@ const Login = () => {
 
                     <div className="register-link">
                         <p>¿No tienes una cuenta?</p>
-                        <a href="/registrarse">Registrarse</a>
+                        <Link to="/registro">Registrarse</Link>
                     </div>
                 </form>
             </div>

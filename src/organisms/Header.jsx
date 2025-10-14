@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 export default function Header() {
   return (
     <header className="primera">
@@ -7,16 +8,16 @@ export default function Header() {
         </div>
 
         <nav className="opciones">
-          <a href="index.html">Inicio</a>
-          <a href="catalogo.html">Catálogo</a>
-          <a href="carrito.html">Carrito</a>
-          <a href="pedido.html">Pedido</a>
-          <a href="envio.html">Envio</a>
+          <Link to="/">Inicio</Link>
+          <Link to="/catalogo">Catálogo</Link>
+          <Link to="/carrito">Carrito</Link>
+          <Link to="/pedido">Pedido</Link>
+          <Link to="/envio">Envio</Link>
         </nav>
         
         <div className="botones-auth">
-          <a href="login.html" className="boton-inicio">Iniciar Sesión</a>
-          <a href="registrarse.html" className="boton-registro">Registrarse</a>
+          <Link to="/login" className="boton-inicio">Iniciar Sesión</Link>
+          <Link to="/registro" className="boton-registro">Registrarse</Link>
         </div>
       </header>
   )

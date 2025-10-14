@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../styles/App.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Registro = () => {
     // Referencias para los campos del formulario
@@ -13,6 +14,7 @@ const Registro = () => {
     const clave2Ref = useRef(null);
     const edadRef = useRef(null);
     const formRef = useRef(null);
+    const navigate = useNavigate();
 
     // Estados para manejar errores
     const [errores, setErrores] = useState({});
@@ -176,6 +178,7 @@ const Registro = () => {
 
         // Si todo está bien, proceder con el envío del formulario
         console.log('Formulario enviado:', formData);
+        navigate("/");
         // Aquí puedes agregar la lógica para enviar los datos al servidor
     };
 
@@ -307,35 +310,33 @@ const Registro = () => {
                         {errores.codigo && <small className="error-text">{errores.codigo}</small>}
                     </div>
 
-                    <div className="form-row">
-                        <div className="form-group">
-                            <label htmlFor="password">Contraseña *</label>
-                            <input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                required 
-                                placeholder="Mínimo 8 caracteres"
-                                value={formData.password}
-                                onChange={handleChange}
-                                className={errores.password ? 'error' : ''}
-                            />
-                            {errores.password && <small className="error-text">{errores.password}</small>}
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="confirmPassword">Confirmar Contraseña *</label>
-                            <input 
-                                type="password" 
-                                id="confirmPassword" 
-                                name="confirmPassword" 
-                                required 
-                                placeholder="Repite tu contraseña"
-                                value={formData.confirmPassword}
-                                onChange={handleChange}
-                                className={errores.confirmPassword ? 'error' : ''}
-                            />
-                            {errores.confirmPassword && <small className="error-text">{errores.confirmPassword}</small>}
-                        </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Contraseña *</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            required 
+                            placeholder="Mínimo 8 caracteres"
+                            value={formData.password}
+                            onChange={handleChange}
+                            className={errores.password ? 'error' : ''}
+                        />
+                        {errores.password && <small className="error-text">{errores.password}</small>}
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="confirmPassword">Confirmar Contraseña *</label>
+                        <input 
+                            type="password" 
+                            id="confirmPassword" 
+                            name="confirmPassword" 
+                            required 
+                            placeholder="Repite tu contraseña"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            className={errores.confirmPassword ? 'error' : ''}
+                        />
+                        {errores.confirmPassword && <small className="error-text">{errores.confirmPassword}</small>}
                     </div>
 
                     <div className="checkbox-group">
@@ -370,7 +371,7 @@ const Registro = () => {
 
                     <div className="login-link">
                         <p>¿Ya tienes una cuenta?</p>
-                        <a href="/login">Iniciar Sesión</a>
+                        <Link to="/login">Iniciar Sesión</Link>
                     </div>
                 </form>
             </div>
