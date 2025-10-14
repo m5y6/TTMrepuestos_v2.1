@@ -3,6 +3,7 @@ import '../styles/Catalogo.css';
 import Footer from '../organisms/Footer';
 import Header from '../organisms/Header';
 
+
 const Catalogo = () => {
     // Base de datos de productos
     const [productos] = useState([
@@ -261,7 +262,7 @@ const Catalogo = () => {
         return () => clearTimeout(timeoutId);
     }, [filtros.busqueda]);
 
-    // Agregar al carrito
+    // Agregar al carritto
     const agregarAlCarrito = (producto) => {
         const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
         carrito.push(producto);
@@ -328,10 +329,17 @@ const Catalogo = () => {
         return paginas;
     };
 
+    function addToCart() {
+        const catalogo = JSON.parse(localStorage.getItem('catalogo')) || []
+        catalogo.push(props)
+        localStorage.setItem('catalogo', JSON.stringify(catalogo))
+        console.log(catalogo)
+    }
+
     return (
         <>
         
-        <Header/>
+        {/* <Header/> */}
 
         <div>
             {/* Header */}
@@ -481,10 +489,8 @@ const Catalogo = () => {
                                         <div className="producto-acciones">
                                             <button 
                                                 className="btn-carrito" 
-                                                onClick={() => agregarAlCarrito(producto)}
-                                            >
-                                                Agregar al Carrito
-                                            </button>
+                                                onClick={() => addToCart()}
+                                            >Agregar al Carrito</button>
                                         </div>
                                     </div>
                                 </div>
