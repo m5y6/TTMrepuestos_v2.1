@@ -24,7 +24,7 @@ describe('Catalogo Page', ()=>{
 ];
 
     it('muestra catalogo correctamente', ()=>{
-        render(<Catalogo/>)
+        render(<Catalogo sinHeaderFooter={true} />)
         expect(screen.getByText("Disco de Freno Brembo")).toBeInTheDocument()
         // expect(screen.getByText("Filtro de aceite original para motores Volvo D12 y D13")).toBeInTheDocument()
         // expect(screen.getByText("45000")).toBeInTheDocument()
@@ -32,13 +32,12 @@ describe('Catalogo Page', ()=>{
     })
 
     it('se guarda en localStorage al hacer clic en guardar',async ()=>{
-        render(<Catalogo  productosActuales={productosMock} />)
-        console.log(<Catalogo  productosActuales={productosMock} />)
-        const button = await screen.getByText("Agregar al Carrito")
+        render(<Catalogo productosActuales={productosMock} sinHeaderFooter={true} />)
+        const button = screen.getAllByText("Agregar al Carrito")[0]
 
         fireEvent.click(button)
         expect(localStorage.setItem).toHaveBeenCalledWith(
-            'catalogo', JSON.stringify([mockCatalogo])
+            'catalogo', JSON.stringify([productosMock[0]])
         )
     })
 })

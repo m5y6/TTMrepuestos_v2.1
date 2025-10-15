@@ -3,7 +3,7 @@ import '../styles/Carrito.css';
 import Footer from '../organisms/Footer';
 import Header from '../organisms/Header';
 
-const Carrito = () => {
+const Carrito = ({carritoActual:carritoActualProp,sinHeaderFooter = false }) => {
     // Variables de estado
     const PRECIO_ENVIO = 5990;
     
@@ -14,7 +14,7 @@ const Carrito = () => {
     };
     
     // Estado inicial de los productos
-    const [productos, setProductos] = useState([
+    const [productos] = useState(carritoActualProp ||[
         {
             id: 1,
             nombre: 'Aceite Motor 15W-40',
@@ -199,7 +199,7 @@ const Carrito = () => {
 
     return (
         <>
-        <Header/>
+        {!sinHeaderFooter && <Header/>}
 
         <section className="carrito-simple">
             <h1 className="carrito-titulo">Mi Carrito de Compras</h1>

@@ -4,9 +4,9 @@ import Footer from '../organisms/Footer';
 import Header from '../organisms/Header';
 
 
-const Catalogo = () => {
+const Catalogo = ({ productosActuales: productosActualesProp, sinHeaderFooter = false }) => {
     // Base de datos de productos
-    const [productos] = useState([
+    const [productos] = useState(productosActualesProp || [
         {
             id: 1,
             nombre: "Filtro de Aceite Volvo",
@@ -329,20 +329,19 @@ const Catalogo = () => {
         return paginas;
     };
 
-    function addToCart() {
+    function addToCart(producto) {
         const catalogo = JSON.parse(localStorage.getItem('catalogo')) || []
-        catalogo.push(props)
+        catalogo.push(producto)
         localStorage.setItem('catalogo', JSON.stringify(catalogo))
         console.log(catalogo)
     }
 
     return (
         <>
-        
-        {/* <Header/> */}
-
+        {/* Renderiza Header solo si sinHeaderFooter es false */}
+        {!sinHeaderFooter && <Header/>}
         <div>
-            {/* Header */}
+ 
             
 
             <main>
@@ -489,7 +488,7 @@ const Catalogo = () => {
                                         <div className="producto-acciones">
                                             <button 
                                                 className="btn-carrito" 
-                                                onClick={() => addToCart()}
+                                                onClick={() => addToCart(producto)}
                                             >Agregar al Carrito</button>
                                         </div>
                                     </div>
@@ -542,7 +541,8 @@ const Catalogo = () => {
         </div>
         
 
-        <Footer/>
+        {/* Renderiza Footer solo si sinHeaderFooter es false */}
+        {!sinHeaderFooter && <Footer/>}
         </>
     );
 };
