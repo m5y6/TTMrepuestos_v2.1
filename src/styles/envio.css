@@ -11,6 +11,8 @@
 .envio-page {
     min-height: 100vh;
     background-color: #f5f5f5;
+    display: flex; /* Añadido para que el footer se quede abajo */
+    flex-direction: column; /* Añadido para que el footer se quede abajo */
 }
 
 /* === HEADER === */
@@ -23,6 +25,7 @@
     align-items: center;
     background-color: #000000;
     padding: 0px 2rem;
+    flex-wrap: wrap; /* Añadido para responsividad de header */
 }
 
 .envio-page nav.opciones {
@@ -40,6 +43,7 @@
     justify-content: space-between;
     padding: 3rem;
     text-decoration: none;
+    transition: color 0.3s ease; /* Transición agregada */
 }
 
 .envio-page #logo {
@@ -48,6 +52,7 @@
     height: 10rem;
     width: 10rem;
     padding: 5px 5px;
+    flex-shrink: 0;
 }
 
 .envio-page #logo img {
@@ -60,6 +65,7 @@
     display: flex;
     gap: 15px;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .envio-page .botones-auth a.boton-inicio, 
@@ -94,6 +100,8 @@
     padding: 40px 2rem;
     max-width: 1400px;
     margin: 0 auto;
+    flex-grow: 1; /* Permite que el contenido principal ocupe el espacio */
+    width: 100%;
 }
 
 .envio-container {
@@ -163,6 +171,18 @@
     outline: none;
     border-color: #5a8756;
     box-shadow: 0 0 10px rgba(90, 135, 86, 0.1);
+}
+
+.search-group input.error {
+    border-color: #d32f2f !important;
+}
+
+.error-text {
+    color: #d32f2f;
+    font-size: .8rem;
+    margin-top: 5px;
+    display: block;
+    text-align: left; /* Asegurar alineación para texto de error */
 }
 
 .search-btn {
@@ -397,6 +417,11 @@
 }
 
 /* === FOOTER === */
+/* Asegurar que el footer sea parte del flujo y se adapte al diseño de columna en .envio-page */
+.envio-page footer {
+    margin-top: auto;
+}
+
 .envio-page .footer {
     width: 100%;
     background-color: #000000;
@@ -487,22 +512,36 @@
     font-size: 0.9rem;
     margin: 0;
 }
-.search-group input.error {
-    border-color: #d32f2f !important;
-}
-
-.error-text {
-    color: #d32f2f;
-    font-size: .8rem;
-    margin-top: 5px;
-    display: block;
-}
 
 /* === MEDIA QUERIES === */
 @media (max-width: 1200px) {
     .info-adicional {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    /* Header vertical para tablets */
+    .envio-page header.primera {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .envio-page nav.opciones {
+        justify-content: center;
+    }
+    
+    .envio-page .opciones > a {
+        font-size: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .envio-page #logo {
+        height: 8rem;
+        width: 8rem;
     }
 }
 
@@ -523,14 +562,27 @@
     .search-form {
         flex-direction: column;
         gap: 10px;
+        align-items: stretch; /* Estirar inputs y botón al 100% */
     }
     
     .envio-header h1 {
         font-size: 2rem;
     }
     
+    /* Timeline más compacto */
     .timeline-item {
         padding-left: 60px;
+    }
+    
+    .proceso-timeline::before {
+        left: 20px;
+    }
+
+    .timeline-item::before {
+        left: 8px;
+        width: 20px;
+        height: 20px;
+        top: 22px;
     }
     
     .info-row {
@@ -545,9 +597,30 @@
 }
 
 @media (max-width: 480px) {
+    
+    /* Header más compacto */
+    .envio-page .opciones {
+        flex-direction: column;
+    }
+
     .envio-page .opciones > a {
         font-size: 1.2rem;
-        padding: 1rem;
+        padding: 0.5rem 1rem; /* Padding reducido para lista vertical */
+    }
+
+    .envio-page #logo {
+        height: 6rem;
+        width: 6rem;
+    }
+
+    .envio-page .botones-auth {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .envio-page .botones-auth a.boton-inicio,
+    .envio-page .botones-auth a.boton-registro {
+        min-width: 100%;
     }
     
     .envio-header {
@@ -558,30 +631,49 @@
         font-size: 1.8rem;
     }
     
-    .timeline-item {
-        padding-left: 50px;
+    .search-btn {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .envio-content {
+        padding: 15px;
     }
     
+    /* Timeline ultra-compacto */
+    .timeline-item {
+        padding-left: 45px;
+    }
+    
+    .proceso-timeline::before {
+        left: 15px;
+    }
+
+    .timeline-item::before {
+        left: 4px;
+        width: 18px;
+        height: 18px;
+    }
+    
+    .timeline-content {
+        padding: 15px;
+    }
+
     .timeline-meta {
         flex-direction: column;
         align-items: flex-start;
         gap: 5px;
     }
 
-    .proceso-timeline::before {
-        left: 20px;
-    }
-
-    .timeline-item::before {
-        left: 8px;
-    }
-
-    .search-btn {
-        width: 100%;
-        padding: 15px;
-    }
-
     .info-card {
         padding: 20px;
+    }
+
+    .envio-page .footer-content {
+        padding: 0 15px;
+    }
+
+    .envio-page .footer-section {
+        text-align: center;
     }
 }

@@ -1,8 +1,132 @@
-import React from 'react'
+import React from 'react';
+
 export default function Footer() {
   return (
-    
-    <footer className="footer">
+    <>
+      {/* Estilos CSS para el Footer */}
+      <style>{`
+        /* Importar fuentes globales (opcional si Header ya las carga) */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+        /* === FOOTER === */
+        .footer {
+            width: 100%;
+            background-color: #000000;
+            padding: 40px 2rem 20px;
+            color: white;
+            margin-top: auto; /* Para 'sticky footer' en layouts flex */
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            font-family: "Oswald", sans-serif;
+            font-size: 1.3rem;
+            color: #5a8756;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .social-link:hover {
+            background: rgba(90, 135, 86, 0.2);
+            border-color: #5a8756;
+            transform: translateY(-2px);
+            color: #5a8756;
+        }
+
+        .social-link svg {
+            flex-shrink: 0;
+        }
+
+        .horarios p, .sucursal p {
+            margin-bottom: 15px;
+            color: #e0e0e0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding: 8px 0;
+        }
+
+        .horarios strong, .sucursal strong {
+            color: #5a8756;
+            font-weight: 600;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #999;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* === MEDIA QUERIES PARA FOOTER === */
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer {
+                padding: 30px 1rem 15px;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-section h3 {
+                font-size: 1.1rem;
+            }
+            
+            .social-link {
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+            
+            .horarios p, .sucursal p {
+                font-size: 0.9rem;
+            }
+        }
+      `}</style>
+      
+      {/* Contenido JSX del Footer */}
+      <footer className="footer">
         <div className="footer-content">
           <div className="footer-section">
             <h3>Síguenos</h3>
@@ -45,5 +169,6 @@ export default function Footer() {
           <p>&copy; 2025 Truck & Trailer Melipilla. Todos los derechos reservados.</p>
         </div>
       </footer>
-  )
+    </>
+  );
 }

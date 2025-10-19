@@ -118,7 +118,7 @@ nav.opciones {
     display: grid;
     grid-template-columns: 280px 1fr;
     gap: 40px;
-    margin-bottom: 60px solid black;
+    margin-bottom: 60px; /* Ajuste: removido el 'solid black' para evitar error de sintaxis */
     background-color: black ;
 }
 
@@ -548,6 +548,10 @@ nav.opciones {
     .footer {
         padding: 30px 1rem 15px;
     }
+    
+    .footer-section { /* Añadido para centrar secciones en móvil */
+        text-align: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -564,6 +568,7 @@ nav.opciones {
         font-size: 0.9rem;
     }
 }
+
 /* Estilos para el buscador - AGREGAR AL FINAL DEL CSS */
 
 /* Contenedor del buscador */
@@ -702,59 +707,45 @@ nav.opciones {
 
 /* Notificación personalizada */
 .notificacion-carrito {
-    font-family: "Roboto", sans-serif;
+    /* Posicionamiento fijo para que sea visible en cualquier parte de la pantalla */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #5a8756; /* Fondo del color primario */
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.5s ease-in-out;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
-/* Responsive para buscador */
-@media (max-width: 768px) {
-    .buscador-container {
-        padding: 20px 15px;
-    }
-    
-    .buscador-input-container {
-        padding: 10px 16px;
-    }
-    
-    .buscador-input {
-        font-size: 0.95rem;
-    }
-    
-    .buscador-input::placeholder {
-        font-size: 0.9rem;
-    }
+/* Clase para mostrar la notificación (se maneja con estado en React) */
+.notificacion-carrito:not(:empty) {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
-@media (max-width: 480px) {
-    .buscador-input::placeholder {
-        content: "Buscar repuestos...";
-    }
-    
-    .paginacion {
-        padding: 20px 15px;
-        gap: 8px;
-    }
-    
-    .btn-pag {
-        padding: 10px 14px;
-        font-size: 0.9rem;
-        min-width: 40px;
-    }
-    
-    .numeros-pag {
-        margin: 0 10px;
-        gap: 6px;
-    }
-}
+
 /* Responsive */
 @media (max-width: 968px) {
     .catalogo-container {
         grid-template-columns: 1fr;
         gap: 20px;
+        padding: 0 15px; /* Reducir padding horizontal */
     }
     
     .filtros-sidebar {
         position: static;
         order: 2;
+        margin: 0 0; /* Asegurar que no tenga margen extra */
+        padding: 20px; /* Reducir padding interno */
     }
     
     .catalogo-content {
@@ -768,6 +759,10 @@ nav.opciones {
     .opciones > a {
         font-size: 1.5rem;
         padding: 2rem;
+    }
+
+    .catalogo-header {
+        padding: 20px;
     }
 }
 
@@ -785,10 +780,28 @@ nav.opciones {
         font-size: 1.2rem;
         padding: 1rem;
     }
+    
+    /* Notificación en móvil */
+    .notificacion-carrito {
+        bottom: 15px;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%) translateY(20px);
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        padding: 12px 20px;
+    }
+    
+    .notificacion-carrito:not(:empty) {
+        transform: translateX(-50%) translateY(0);
+    }
+    
 }
 
 @media (max-width: 480px) {
     .productos-grid {
+        /* En pantallas muy pequeñas, forzar una sola columna */
         grid-template-columns: 1fr;
     }
     
@@ -798,5 +811,39 @@ nav.opciones {
     
     .catalogo-hero h1 {
         font-size: 1.8rem;
+    }
+
+    /* Paginación compacta en móvil */
+    .paginacion {
+        padding: 15px 10px;
+        gap: 5px;
+        flex-wrap: wrap; /* Permite que los elementos salten de línea si no caben */
+    }
+    
+    .btn-pag {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        min-width: 35px;
+    }
+    
+    .numeros-pag {
+        margin: 0 5px;
+        gap: 4px;
+    }
+    
+    .filtros-sidebar {
+        padding: 15px;
+    }
+    
+    .filtros-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .filtro-grupo h4 {
+        font-size: 1rem;
+    }
+    
+    .precio-input label, .filtro-checkbox span {
+        font-size: 0.85rem;
     }
 }

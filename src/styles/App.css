@@ -893,63 +893,44 @@ nav.opciones {
     text-decoration: underline;
 }
 
-/* Media queries para login */
+/* === MEDIA QUERIES === */
+
+/* === Pantallas Grandes (Tablets en vertical) === */
 @media (max-width: 1200px) {
+    /* Registro */
+    .registro-body {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .registro-body .contacto-section {
+        max-width: 500px;
+    }
+
+    /* Login */
     .login-body {
         flex-direction: column;
         gap: 30px;
     }
-    
     .login-body .contacto-section {
         max-width: 450px;
     }
 }
 
+/* === Pantallas Medianas (Tablets) === */
 @media (max-width: 768px) {
-    .login-body {
-        padding: 10px;
-    }
-    
-    .login-container {
-        padding: 30px;
-        min-height: auto;
-    }
-    
-    .login-options {
+    /* --- HEADER (Global) --- */
+    .primera {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
+        height: auto;
+        padding: 1rem;
+        gap: 1rem;
     }
-}
+    nav.opciones {
+        padding-left: 0;
+        justify-content: center;
+    }
 
-@media (max-width: 480px) {
-    .login-logo-section h1 {
-        font-size: 2rem;
-    }
-    
-    .login-body .contacto-section h3 {
-        font-size: 1.8rem;
-    }
-    
-    .login-body .contacto-section p {
-        font-size: 1rem;
-    }
-}
-
-/* === MEDIA QUERIES === */
-@media (max-width: 1200px) {
-    .registro-body {
-        flex-direction: column;
-        gap: 30px;
-    }
-    
-    .registro-body .contacto-section {
-        max-width: 500px;
-    }
-}
-
-@media (max-width: 768px) {
-    /* Página principal */
+    /* Página principal (Home) */
     .home-page .opciones > a {
         font-size: 1.5rem;
         padding: 2rem;
@@ -961,12 +942,24 @@ nav.opciones {
         gap: 20px;
     }
     
-    .home-page .contenedor-imagen .titulo {
+    /* Galería (Home) */
+    .contenedor-imagen {
+        height: 450px; /* Reducido de 600px */
+    }
+    .contenedor-imagen .titulo {
         font-size: 36px;
     }
-    
-    .home-page .contenedor-imagen .texto {
+    .contenedor-imagen .texto {
         font-size: 24px;
+    }
+
+    /* --- FOOTER (Global) --- */
+    .home-page .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .home-page .footer-section {
+        text-align: center;
     }
     
     /* Página de registro */
@@ -983,15 +976,47 @@ nav.opciones {
         padding: 30px;
         min-height: auto;
     }
-}
 
-@media (max-width: 480px) {
-    /* Página principal */
-    .home-page .opciones > a {
-        font-size: 1.2rem;
-        padding: 1rem;
+    /* Página de login */
+    .login-body {
+        padding: 10px;
     }
     
+    .login-container {
+        padding: 30px;
+        min-height: auto;
+    }
+    
+    .login-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
+
+/* === Pantallas Pequeñas (Móviles) === */
+@media (max-width: 480px) {
+    /* --- HEADER (Global) --- */
+    nav.opciones {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .home-page .opciones > a {
+        font-size: 1.2rem;
+        padding: 0.5rem 1rem; /* Padding reducido para links apilados */
+    }
+    .botones-auth {
+        flex-direction: column;
+        width: 80%; /* Hacer botones anchos */
+        gap: 10px;
+    }
+    .botones-auth a.boton-inicio,
+    .botones-auth a.boton-registro {
+        min-width: 100%;
+    }
+    
+    /* Página principal (Home) */
     .home-page .productos {
         grid-template-columns: 1fr;
         grid-template-rows: repeat(6, 1fr);
@@ -1001,11 +1026,14 @@ nav.opciones {
         font-size: 2rem;
     }
     
-    .home-page .contenedor-imagen .titulo {
+    /* Galería (Home) */
+    .contenedor-imagen {
+        height: 350px; /* Reducido aún más */
+    }
+    .contenedor-imagen .titulo {
         font-size: 28px;
     }
-    
-    .home-page .contenedor-imagen .texto {
+    .contenedor-imagen .texto {
         font-size: 20px;
     }
     
@@ -1013,12 +1041,21 @@ nav.opciones {
     .logo-section h1 {
         font-size: 2rem;
     }
-    
     .registro-body .contacto-section h3 {
         font-size: 1.8rem;
     }
-    
     .registro-body .contacto-section p {
+        font-size: 1rem;
+    }
+
+    /* Página de login */
+    .login-logo-section h1 {
+        font-size: 2rem;
+    }
+    .login-body .contacto-section h3 {
+        font-size: 1.8rem;
+    }
+    .login-body .contacto-section p {
         font-size: 1rem;
     }
 }

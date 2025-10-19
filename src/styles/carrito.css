@@ -110,16 +110,11 @@ nav.opciones {
     font-size: 2.5rem;
 }
 
+/* Diseño de 2 columnas para Escritorio */
 .carrito-grid {
     display: grid;
     grid-template-columns: 1fr 350px;
     gap: 30px;
-}
-
-@media (max-width: 900px) {
-    .carrito-grid {
-        grid-template-columns: 1fr;
-    }
 }
 
 .carrito-items {
@@ -129,9 +124,10 @@ nav.opciones {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* Diseño de 4 columnas para Ítems en Escritorio */
 .carrito-item {
     display: grid;
-    grid-template-columns: 80px 1fr auto auto;
+    grid-template-columns: 80px 1fr auto auto; /* Imagen | Info | Cantidad | Precio/Eliminar */
     gap: 15px;
     padding: 15px 0;
     border-bottom: 1px solid #eee;
@@ -171,12 +167,17 @@ nav.opciones {
     font-weight: bold;
     color: #5a8756;
     font-size: 1.1rem;
+    /* En desktop, el precio se alinea al final de la celda de la grilla */
+    justify-self: end; 
 }
 
 .item-cantidad {
     display: flex;
     align-items: center;
     gap: 10px;
+    min-width: 100px;
+    /* En desktop, la cantidad se alinea al inicio de la celda */
+    justify-self: start; 
 }
 
 .btn-cantidad {
@@ -191,6 +192,7 @@ nav.opciones {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .cantidad-numero {
@@ -211,6 +213,9 @@ nav.opciones {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    /* Mover el botón eliminar para que esté al lado de la cantidad en desktop, 
+       ajustando la grilla. Lo dejamos al final de la grilla principal de 4 cols. */
 }
 
 /* === RESUMEN DEL PEDIDO === */
@@ -316,12 +321,18 @@ nav.opciones {
 }
 
 .mensaje-codigo {
-    display: none;
+    /* Aquí se debe controlar la visibilidad con React añadiendo/quitando la clase 'mostrar' */
+    display: none; 
     padding: 8px 12px;
     border-radius: 6px;
     font-size: 0.85rem;
     font-weight: 500;
     margin-top: 5px;
+}
+
+/* Clase para mostrar el mensaje desde React */
+.mensaje-codigo.mostrar {
+    display: block;
 }
 
 .mensaje-codigo.exito {
@@ -367,6 +378,8 @@ nav.opciones {
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-width: 600px;
+    margin: 50px auto;
 }
 
 .carrito-vacio-icon {
@@ -496,7 +509,21 @@ footer {
 }
 
 /* === RESPONSIVE === */
+@media (max-width: 900px) {
+    /* El carrito-grid se convierte en una sola columna a partir de 900px */
+    .carrito-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* El resumen ya no es sticky en móvil/tablet */
+    .resumen-pedido {
+        position: static;
+    }
+}
+
+
 @media (max-width: 768px) {
+    /* === HEADER y FOOTER === */
     header.primera {
         flex-direction: column;
         height: auto;
@@ -513,36 +540,66 @@ footer {
         font-size: 2rem;
     }
     
+    /* === ÍTEMS DEL CARRITO (LAYOUT MOBILE) === */
     .carrito-item {
+        /* Define un diseño de grilla de 2 columnas con 3 filas */
         grid-template-columns: 60px 1fr;
+        grid-template-rows: auto auto auto;
         grid-template-areas: 
             "imagen info"
             "imagen precio"
             "cantidad eliminar";
         gap: 10px;
+        padding: 10px 0;
     }
     
+    /* Asigna cada elemento a su área */
     .item-imagen {
         grid-area: imagen;
+        width: 60px;
+        height: 60px;
     }
     
     .item-info {
         grid-area: info;
     }
     
+    .item-info p {
+        display: none; /* Ocultar la descripción para ahorrar espacio */
+    }
+    
     .item-precio {
         grid-area: precio;
+        font-size: 1rem;
+        justify-self: start; /* Alineación a la izquierda para mejor flujo */
+        align-self: center;
     }
     
     .item-cantidad {
         grid-area: cantidad;
+        gap: 8px;
+    }
+    
+    .btn-cantidad {
+        width: 25px;
+        height: 25px;
+        font-size: 0.9rem;
+    }
+    
+    .cantidad-numero {
+        min-width: 25px;
     }
     
     .btn-eliminar {
         grid-area: eliminar;
-        justify-self: end;
+        justify-self: end; /* Alineación a la derecha */
+        align-self: center;
+        width: 25px;
+        height: 25px;
+        font-size: 1rem;
     }
     
+    /* === RESUMEN Y CÓDIGO === */
     .input-grupo {
         flex-direction: column;
     }
@@ -551,6 +608,7 @@ footer {
         width: 100%;
     }
     
+    /* === FOOTER === */
     .footer-content {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -566,6 +624,7 @@ footer {
 }
 
 @media (max-width: 480px) {
+    /* Ajustes mínimos para pantallas muy pequeñas */
     .footer-section h3 {
         font-size: 1.1rem;
     }
@@ -577,5 +636,9 @@ footer {
     
     .horarios p, .sucursal p {
         font-size: 0.9rem;
+    }
+    
+    .carrito-titulo {
+        font-size: 1.7rem;
     }
 }

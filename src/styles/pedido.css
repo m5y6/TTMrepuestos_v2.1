@@ -11,6 +11,8 @@
 /* === ESTILOS PARA EL HEADER (IGUAL AL INDEX) === */
 body {
     min-height: 100vh;
+    display: flex; /* Añadido para sticky footer */
+    flex-direction: column; /* Añadido para sticky footer */
 }
 
 header.primera {
@@ -91,7 +93,7 @@ nav.opciones {
 
 /* === ESTILOS PARA LA SECCIÓN DE PEDIDO === */
 .pedido-section {
-    min-height: calc(100vh - 150px - 200px); /* Header height - footer approximate height */
+    flex-grow: 1; /* Reemplaza min-height para sticky footer */
     background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
     padding: 60px 20px;
     display: flex;
@@ -156,8 +158,9 @@ nav.opciones {
     letter-spacing: 1px;
 }
 
-.form-group input,
-.form-group textarea {
+/* Clases de inputs del JSX */
+.form-input,
+.form-textarea {
     width: 100%;
     padding: 15px 20px;
     border: 3px solid #e0e0e0;
@@ -168,8 +171,8 @@ nav.opciones {
     font-family: "Roboto", sans-serif;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.form-input:focus,
+.form-textarea:focus {
     outline: none;
     border-color: #5a8756;
     background: white;
@@ -177,11 +180,53 @@ nav.opciones {
     transform: translateY(-2px);
 }
 
-.form-group textarea {
+.form-textarea {
     resize: vertical;
     min-height: 120px;
     max-height: 200px;
 }
+
+/* === ESTILOS DE VALIDACIÓN AÑADIDOS === */
+.form-input.error,
+.form-textarea.error {
+    border-color: #d32f2f !important;
+    background-color: #ffebee;
+}
+
+.form-input.success,
+.form-textarea.success {
+    border-color: #388e3c;
+    background-color: #e8f5e9;
+}
+
+.error-text {
+    color: #d32f2f;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: block;
+}
+
+.mensaje-estado {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.mensaje-estado.exito {
+    background-color: #e8f5e9;
+    color: #388e3c;
+    border: 1px solid #388e3c;
+}
+
+.mensaje-estado.error {
+    background-color: #ffebee;
+    color: #d32f2f;
+    border: 1px solid #d32f2f;
+}
+/* === FIN DE ESTILOS DE VALIDACIÓN === */
+
 
 .form-row {
     display: grid;
@@ -258,6 +303,7 @@ nav.opciones {
     background-color: #000000;
     padding: 40px 2rem 20px;
     color: white;
+    margin-top: auto; /* Parte de la solución sticky footer */
 }
 
 .footer-content {
@@ -336,6 +382,31 @@ nav.opciones {
 }
 
 /* === MEDIA QUERIES === */
+
+@media (max-width: 900px) {
+    /* Header vertical para tablets */
+    header.primera {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    nav.opciones {
+        justify-content: center;
+    }
+    
+    .opciones > a {
+        font-size: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    #logo {
+        height: 8rem;
+        width: 8rem;
+    }
+}
+
 @media (max-width: 768px) {
     .opciones > a {
         font-size: 1.5rem;
@@ -344,22 +415,7 @@ nav.opciones {
     
     .pedido-container {
         padding: 30px;
-        margin: 20px;
-    }
-    
-    .pedido-container.moved-right {
-        transform: translateX(0);
-        max-width: 600px;
-    }
-    
-    .estado-pedido {
-        position: relative;
-        left: auto;
-        top: auto;
-        transform: none;
-        width: 90%;
-        max-width: 400px;
-        margin: 20px auto 0;
+        margin: 20px 0; /* Ajustado para que no se salga */
     }
     
     .pedido-header h1 {
@@ -369,20 +425,55 @@ nav.opciones {
     .form-row {
         grid-template-columns: 1fr;
         gap: 15px;
+        margin-bottom: 15px; /* Reducido para móvil */
+    }
+
+    .form-group {
+        margin-bottom: 20px; /* Reducido para móvil */
     }
     
     .footer-content {
         grid-template-columns: 1fr;
         gap: 30px;
     }
+
+    .footer-section {
+        text-align: center; /* Centrar secciones del footer */
+    }
 }
 
 @media (max-width: 480px) {
+    /* Header compacto */
+    nav.opciones {
+        flex-direction: column;
+        align-items: center;
+    }
+
     .opciones > a {
         font-size: 1.2rem;
-        padding: 1rem;
+        padding: 0.5rem 1rem;
     }
     
+    #logo {
+        height: 6rem;
+        width: 6rem;
+    }
+
+    .botones-auth {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+    
+    .botones-auth a.boton-inicio,
+    .botones-auth a.boton-registro {
+        min-width: 100%;
+    }
+
+    .pedido-section {
+        padding: 20px 10px;
+    }
+
     .pedido-header h1 {
         font-size: 2rem;
     }
@@ -391,19 +482,17 @@ nav.opciones {
         padding: 25px;
     }
     
-    .estado-pedido {
-        padding: 25px;
-        width: 95%;
+    .form-group label {
+        font-size: 1rem;
     }
     
-    .estado-pedido h2 {
-        font-size: 1.5rem;
+    .form-input, .form-textarea {
+        padding: 12px 15px;
+        font-size: 1rem;
     }
     
-    .estado-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-        margin-right: 15px;
+    .btn-pedido {
+        font-size: 1.1rem;
+        padding: 15px;
     }
 }
